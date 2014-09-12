@@ -1,0 +1,54 @@
+At the server console:
+$ nc -v -w 30 -p 5600 l- > filename.back
+
+and on the client side:
+$ nc -v -w 2 10.0.1.1 5600 < filename
+
+****
+
+remote shell, always open
+ncat --exec "/bin/bash" -l 8081 --keep-open
+
+
+if nmap is installed, use ncat instead!
+
+       Connect to example.org on TCP port 8080
+
+       ncat example.org 8080
+
+       Listen for connections on TCP port 8080
+
+       ncat -l 8080
+
+       Redirect TCP port 8080 on the local machine to host example.org on port 80
+
+       ncat --sh-exec "ncat example.org 80" -l 8080
+
+       Bind to TCP port 8081 and attach /bin/bash for the world to access freely
+
+       ncat --exec "/bin/bash" -l 8081
+
+       Bind a shell to TCP port 8081, limit access to hosts on a local network and limit
+       the maximum number of simultaneous connections to three
+
+       ncat --exec "/bin/bash" --max-conns 3 --allow 192.168.0.0/24 -l 8081
+
+       Connect to a SOCKS4 server on port 1080
+
+       ncat --proxy socks4host --proxy-type socks4 --proxy-auth user smtphost 25
+
+       Create an HTTP proxy server on localhost port 8888
+
+       ncat -l --proxy-type http localhost 8888
+
+       Send a file over TCP port 9899 from HOST2 (client) to HOST1 (server)
+
+       HOST1$ ncat -l 9899 >outputfile
+
+       HOST2$ ncat HOST1 9899 <inputfile
+
+       Transfer in the other direction, turning Ncat into a "one file" server
+
+       HOST1$ ncat -l 9899 <inputfile
+
+       HOST2$ ncat HOST1 9899 >outputfile
